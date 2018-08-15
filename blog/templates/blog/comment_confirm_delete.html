@@ -1,0 +1,25 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+
+<!--Remember that in our blog-detail page, the links to delete a comment only appeared to the user who
+actually wrote the comment, allowing them to delete it, but that is not full proof, another user might just enter
+the url directing to the delete view of a comment, the below makes sure that only the owner or author
+of the comment can delete that comment, great-->
+{% if comment.author == user %}
+<h1>Delete Comment</h1>
+
+<p>Are you sure you want to delete your comment on the {{comment.blog}} blog? </p>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="submit" action="" value="Yes, delete." />
+</form>
+
+{% else %}
+<p>I see what you are trying to do there, but you cannot delete this comment because you are not the author</p>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "base_generic.html" %} {% block title %}
+<title>Blog</title> {% endblock %} {% block content %}
+
+<article class="grid-container fluid">
+    <div class="grid-x grid-margin-x">
+        <div class="cell medium-3">
+            <img src="https://webstaticcontent.blob.core.windows.net/foundation6/blog-scrabble.jpg" alt="blog-logo" class="imageblog">
+            <p>
+                <strong>Topic: </strong>{{blog.topic}}</p>
+            <!--Important syntax below here. We must pass the pk in the 'blogauthor-detail' view function
+            we can access the pk of the current context using blog.blogAuthor.pk-->
+            <p>
+                <strong>Blogger: </strong>
+                <a href="{% url 'blogauthor-detail' blog.blogAuthor.pk %}">{{blog.blogAuthor}}</a>
+            </p>
+            <p>
+                <strong>Date Posted: </strong>{{blog.postDate}}</p>
+        </div>
+        <div class="cell medium-9 align-mid">
+            <br>
+            <br>
+            <h3 class="blogname">{{blog.blog_name}}</h3>
+            <p>
+                {{blog.content}}
+                <div style="margin-left:20px;margin-top:20px">
+
+                    <h4>Comments</h4>
+
+                    {% for comments in blog.comment_set.all %}
+                    <p>
+                        <hr> {{comments.author}} ({{comments.post_date}})
+                        <br> {{comments.content}}
+                        <!--We check if the logged in user is actually the one who wrote the comment, therefore the
+                        only the comment writer will be able to delete and edit that comment, we will add another validation
+                    to the url that it directs to-->
+                        {% if user == comments.author %}
+                        <p><a href="{% url 'comment_delete' comments.pk%}?next={{request.path}} ">Delete Comment</a></p>
+                        {% endif %}
+                    </p> {% endfor %}
+
+                    <p>
+                        <!-- This calls the create-comment view and passes the pk of the blog as below-->
+                        <a href="{% url 'create-comment' blog.pk %}">Comment</a>
+                    </p>
+                
+                </div>
+            </p>
+        </div>
+    </div>
+
+
+
+</article>
+
+
+<script>
+    /*strange things started happening with the code below-will revisit
+    var btn = document.querySelector('button');
+    var content = document.querySelector('pre');
+    var url = "{% url 'blog-detail' blog.pk %}";
+
+    btn.onclick = function () {
+        var request = new XMLHttpRequest();
+        request.open('GET', url);
+        request.responseType = "document";
+        request.onload = function () {
+            content.textContent = request.response;
+        };
+        request.send();
+    };
+
+</script> {% endblock %}

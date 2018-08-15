@@ -1,0 +1,35 @@
+<div class="top-bar">
+        <div class="top-bar-left">
+               
+            <ul class="dropdown menu" data-dropdown-menu>
+
+                <a href="{% url 'index' %}">
+                    <b class="hometab">Home</b>
+                </a>
+            
+
+                <li>
+                    <a href="{% url 'blogs' %}">All Blogs</a>
+                </li>
+                <li>
+                    <a href="{% url 'bloggers' %}">All Bloggers</a>
+                </li>
+                <li>
+                    <a href="#">Categories</a>
+                    <ul class="menu vertical">
+                        <li>
+                            <a href="#">Love</a>
+                        </li>
+                        <li>
+                            <a href="#">Friendship</a>
+                        </li>
+                        <li>
+                            <a href="#">Tragedy</a>
+                        </li>
+                        <li>
+                            <a href="#">Death</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>

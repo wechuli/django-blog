@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> {% block title %}
+    <title>Blog Home Page</title> {% endblock %}
+
+    <link rel="stylesheet" href="https://webstaticcontent.blob.core.windows.net/foundation6/foundation.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+
+    <!--Add additional CSS in static file
+    This is our static stylesheet file, note that there was no need to indicate 'static' as the top
+directory folder-->
+
+    {% load static %}
+    <link rel="stylesheet" href=" {% static "css/styles.css" %}">
+</head>
+<!--Navigation Bar-->
+<!-- Start Top Bar -->
+<header>
+    <div class="top-bar">
+        <div class="top-bar-left">
+
+            <ul class="dropdown menu" data-dropdown-menu>
+
+                <a href="{% url 'index' %}">
+                    <b class="hometab">Home</b>
+                </a>
+
+
+                <li>
+                    <a href="{% url 'blogs' %}">All Blogs</a>
+                </li>
+                <li>
+                    <a href="{% url 'bloggers' %}">All Bloggers</a>
+                </li>
+                <li>
+                    <a href="{% url 'topics' %}">All Topics</a>
+                </li>
+            </ul>
+        </div>
+        <div class="top-bar-right">
+            <ul class="menu">
+                {% if user.is_authenticated %}
+                <li class="menu-text">User: {{user.get_username}}</li>
+                <li>
+                    <a href="{% url 'logout'%}?next={{request.path}}">Logout</a>
+                </li>
+                {% if perms.blog.can_add %}
+                <p>You have Perms</p>
+
+                {% endif %}
+                <li>
+                    <a href="{% url 'my-blogs'%}">My Blogs</a>
+                </li>
+                <li>
+                    <a href="{% url 'blog-create' %}">Write New Blog</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'login'%}?next={{request.path}}">Login</a>
+                </li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+</header>
+
+
+<!-- End Top Bar -->
+
+<article class="grid-container">
+    {% block content %} {% endblock %} {% block pagination %} {% if is_paginated %}
+    <div class="pagination">
+        <span class="page-links">
+            {% if page_obj.has_previous %}
+            <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="page-current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+            <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+    {% endif %} {% endblock %}
+
+</article>
+
+
+
+<!--End of Navigation Bar -->
+
+
+<!--
+    
+-->
+
+
+
+<!--End of Footer-->
+<script src="https://webstaticcontent.blob.core.windows.net/foundation6/jquery.js"></script>
+<script src="https://webstaticcontent.blob.core.windows.net/foundation6/what-input.js"></script>
+<script src="https://webstaticcontent.blob.core.windows.net/foundation6/foundation.js"></script>
+<!--We can serve our custom js from the /static/js folder
+        Note that we did not need to specify the static folder at the start of the file path
+        Django assumes any referenced files will be in a folder named 'static' in the same
+        directory that you are writing the view function
+    -->
+{% load static %}
+<script src="{% static "js/app.js" %}"></script>
+</body>
+
+</html>

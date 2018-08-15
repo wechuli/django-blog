@@ -1,0 +1,39 @@
+{% extends "base_generic.html" %}
+{% block title %}
+<title>Blogger Details</title> {% endblock %}
+{% block content %}
+
+<article class="grid-container fluid">
+    <div class="grid-x grid-margin-x">
+        <div class="cell medium-3">
+            <img src="https://webstaticcontent.blob.core.windows.net/foundation6/blogger-pic.jpg" alt="blogger-logo" class="imageblog">
+            <p><strong>Nickname: </strong>{{blogauthor.username}}</p>
+            <p><strong>Tagline: </strong>{{blogauthor.tag_line}}</p>
+          
+        </div>
+        <div class="cell medium-9 align-mid">
+            <br>
+            <br>
+            <h3 class="blogname">{{blogauthor.last_name}},{{blogauthor.first_name}}</h3>
+            <p>
+                <h4>Bio:</h4>
+                {{blogauthor.bio}}
+                <hr>
+
+                <h5>Blogs By {{blogauthor.last_name}}</h5>
+                <ul>
+                    {% for blog in blogauthor.blog_set.all %}
+                <a href="{{ blog.get_absolute_url }}"><li>{{blog.blog_name}}</li></a> 
+
+                    {% endfor %}
+                </ul>
+                
+            </p>
+        </div>
+    </div>
+
+
+</article>
+
+
+{% endblock %}

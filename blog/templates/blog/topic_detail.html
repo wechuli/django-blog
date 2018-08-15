@@ -1,0 +1,35 @@
+{% extends "base_generic.html" %}
+{% block title %}
+<title>Topic Description</title> {% endblock %}
+{% block content %}
+
+<article class="grid-container fluid">
+    <div class="grid-x grid-margin-x">
+        <div class="cell medium-3">
+            <img src="https://webstaticcontent.blob.core.windows.net/foundation6/blogger-pic.jpg" alt="blogger-logo" class="imageblog">
+            <p><strong>Topic Name: </strong>{{topic.topic_name}}</p>
+            <p><strong>Short Description: </strong>{{topic.description}}</p>
+          
+        </div>
+        <div class="cell medium-9 align-mid">
+            <br>
+            <br>
+            <h3 class="blogname">Blogs under the {{topic.topic_name}} topic</h3>
+            <p>
+             
+                    <ul>
+                            {% for blog in topic.blog_set.all %}
+                        <a href="{{ blog.get_absolute_url }}"><li>{{blog.blog_name}}</li></a> 
+        
+                            {% endfor %}
+                        </ul>
+                
+            </p>
+        </div>
+    </div>
+
+
+</article>
+
+
+{% endblock %}

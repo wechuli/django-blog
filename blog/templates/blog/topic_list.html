@@ -1,0 +1,25 @@
+{% extends "base_generic.html" %}
+{% block title %}
+<title>All Topics</title> {% endblock %}
+
+{% block content %}
+<div class="wrap">
+    <h1 class="bloglisthead">All Topics in Our Blog</h1>
+
+    {% if topic_list %}
+    <ul>
+
+      {% for topic in topic_list %}
+      <li>
+        <a href="{{ topic.get_absolute_url }}">{{topic.topic_name }}</a>
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no topics, that would naturally mean there are no blogs published yet.Sorry.</p>
+    {% endif %}    
+</div>
+
+    
+{% endblock %}

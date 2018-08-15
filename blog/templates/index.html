@@ -1,0 +1,35 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="grid-x align-center">
+    <div class="cell medium-8">
+        <div class="blog-post">
+            <h3>About the Mini Blog</h3>
+            
+            <img src="https://webstaticcontent.blob.core.windows.net/foundation6/blog-sand.jpg" alt="blog home page" srcset="">
+
+
+            <p>This is a small wonderful blog built using the Django framework. We know, it's nothing fancy and alot can be
+                worked on, but emphasis at the moment was on functionality rather than UI design. You can browse below to
+                look at the summary of all blog posts and authors. You will find some funny, interesting, informative and
+                downright silly content in the blogs. Enjoya!
+
+                <h3>Blog Summary</h3>
+
+                <ul class="blog-summary">
+                    <li>
+                        <strong>Topics:</strong> {{ num_topics }}</li>
+                    <li>
+                        <strong>Blogs:</strong> {{ num_blogs }}</li>
+                    <li>
+                        <strong>Bloggers:</strong> {{ num_authors }}</li>
+                    
+                </ul>
+                <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
+            </p>
+
+        </div>
+    </div>
+
+
+    {% endblock %}

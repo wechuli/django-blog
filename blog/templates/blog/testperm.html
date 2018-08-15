@@ -1,0 +1,35 @@
+{% extends "base_generic.html" %}
+{% block title %}
+<title>All Bloggers</title> {% endblock %}
+
+{% block content %}
+<div class="wrap">
+    <h1 class="bloglisthead">All Bloggers</h1>
+
+    {% if perms.blog.can_view_all %}
+    <!-- We can mark a BookInstance as returned. -->
+    <!-- Perhaps add code to link to a "book return" view here. -->
+
+
+    {% if blog_list %}
+    <ul>
+
+      {% for blog in blog_list %}
+      <li>
+        <a href="{{blog.get_absolute_url}}">{{ blog.blog_name }}</a> 
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no bloggers at the moment, which means you will naturally have no blogs.Sorry.</p>
+    {% endif %} 
+
+    {% else %}
+    <p>You are not allowed to view this page.</p>
+
+    {% endif %}
+</div>
+
+    
+{% endblock %}

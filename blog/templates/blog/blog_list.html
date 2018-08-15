@@ -1,0 +1,25 @@
+{% extends "base_generic.html" %}
+{% block title %}
+<title>All Blogs</title> {% endblock %}
+
+{% block content %}
+<div class="wrap">
+    <h1 class="bloglisthead">Our Blogs</h1>
+
+    {% if blog_list %}
+    <ul>
+
+      {% for blog in blog_list %}
+      <li>
+        <a href="{{ blog.get_absolute_url }}">{{ blog.blog_name }}</a> ({{blog.postDate}}) - <a href="{% url 'blogauthor-detail' blog.blogAuthor.pk %}">{{blog.blogAuthor}}</a> 
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no blogs published yet.Sorry.</p>
+    {% endif %}    
+</div>
+
+    
+{% endblock %}
