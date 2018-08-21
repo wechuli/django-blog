@@ -1,6 +1,8 @@
 # django-blog
 Blog built on top of django, very simple with a very bad front-end interface but it works-ish.
 
+You can view the running blog here https://lit-gorge-86581.herokuapp.com
+
 
 
 #Install virtual env
