@@ -4,7 +4,7 @@
 
 
 <!--Remember that in our blog-detail page, the links to delete a comment only appeared to the user who
-actually wrote the comment, allowing them to delete it, but that is not full proof, another user might just enter
+actually wrote the comment, allowing them to delete it, but that is not fool proof, another user might just enter
 the url directing to the delete view of a comment, the below makes sure that only the owner or author
 of the comment can delete that comment, great-->
 {% if comment.author == user %}
